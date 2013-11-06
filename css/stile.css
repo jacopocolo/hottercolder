@@ -1,0 +1,217 @@
+/*@import url(http://weloveiconfonts.com/api/?family=entypo);
+
+/* entypo 
+[class*="entypo-"]:before {
+	font-family: 'entypo', sans-serif;
+	font-size: 0.4em;
+	}
+*/
+
+@font-face {
+	font-family: 'Climacons-Font';
+	src:url('../font/climacons-webfont.eot');
+	src:url('../font/climacons-webfont.eot?#iefix') format('embedded-opentype'),
+		url('../font/climacons-webfont.svg#Climacons-Font') format('svg'),
+		url('../font/climacons-webfont.woff') format('woff'),
+		url('../font/climacons-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.climacon:before{
+	font-family: 'Climacons-Font';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+.climacon.rain:before,
+.climacon.rain.cloud:before {
+	/*content: "\e003";*/
+}
+
+.climacon.thermometer.medium-high:before {
+	/*content: "\e03b";*/
+}
+
+html {
+ overflow: hidden;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow: hidden;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* 
+LE CLASSI SPECIALI PER I COLORI DI FONDO DEL WRAPPER
+*/
+
+#wrapper.comeieri {
+	background-color: rgb(239, 239, 239);
+}
+
+#wrapper.popiufreddo {
+	background-color: rgb(0, 172, 255);
+}
+
+#wrapper.popiucaldo {
+	background-color: rgb(255, 246, 136);
+}
+
+#wrapper.piufreddo {
+	background-color: rgb(0, 73, 109);
+}
+
+#wrapper.piucaldo {
+	background-color: rgb(255, 204, 51);
+}
+
+#wrapper {
+	margin: 0 auto;
+	padding: 20px;
+	width: 100%;
+	height: 100%;
+	display: table;
+	line-height: 1em;
+	box-sizing: border-box;
+	background-color: rgb(239, 239, 239);
+	/*letter-spacing:-2px;*/
+	overflow: hidden;
+}
+
+#center-titlescreen {
+	padding: 10px;
+	display: table-cell;
+	vertical-align: middle;
+	height: 100%;
+	box-sizing: border-box;	
+}
+
+#table {
+  padding: 0px;
+  display: table-cell;
+  vertical-align: middle;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: inherit;
+}
+
+#titlescreen {
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	/*font-size: 2.7em;*/
+	font-size: 60px;
+	line-height: 1.2em;
+	/*height: 40%;*/
+	margin: 0 auto;
+	/*display: block;*/
+	color: rgb(0, 73, 109);
+}
+
+#hotterOrColder {
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	/*font-size: 2.7em;*/
+	font-size: 60px;
+	line-height: 1.2em;
+	/*height: 40%;*/
+	margin: 0 auto;
+	/*display: block;*/
+	}
+	
+/*Le classi speciali per i colori dei testi*/
+#hotterOrColder.comeieri {
+	color: rgb(255, 204, 51);
+}
+
+#pioggia.POPpopiufreddo, #hotterOrColder.popiufreddo {
+	color: rgb(255, 255, 255);
+}
+
+#hotterOrColder.popiucaldo {
+	color: rgb(0, 73, 109);
+}
+
+#pioggia.POPpiufreddo, #hotterOrColder.piufreddo {
+	color: rgb(255, 255, 255);
+}
+
+#hotterOrColder.piucaldo {
+	color: rgb(0, 73, 109);
+}
+
+
+#popoverOggi {
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	border-top: 2px solid rgba(0, 73, 109, 0.2);
+	}
+
+#popoverIeri, #ombrello {
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	border-bottom: 2px solid rgba(0, 73, 109, 0.2);
+	}
+
+.popOggi, .popIeri, #dataIeri, #dataOggi, #ieri, #oggi, .popProb, #prob {
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 0.5em;
+	line-height: 0.4em;
+}
+
+#pioggia {
+}
+
+#pioggia.comeieri, #ieri.comeieri, #oggi.comeieri, #prob.comeieri, .climacon.comeieri, .climacon.comeieri {
+	color: rgb(0, 73, 109);
+}
+
+#ieri.POPpopiufreddo, #oggi.POPpopiufreddo, #prob.POPpopiufreddo, .climacon.POPpopiufreddo, .climacon.POPpopiufreddo {
+	color: rgb(0, 172, 255);
+}
+
+#ieri.POPpiufreddo, #oggi.POPpiufreddo, #prob.POPpiufreddo, .climacon.POPpiufreddo, .climacon.POPpiufreddo {
+	color: rgb(0, 102, 153);
+}
+
+#popoverOggi.piufreddo {
+	border-top: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+#popoverIeri.piufreddo, #ombrello.piufreddo {
+	border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+
+#credits {
+display: none;
+font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+position: absolute;
+bottom: 5px;
+left: 20px;
+color: rgb(33, 33, 33);
+}
+
+#chiudi {
+display: none;
+font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+position: absolute;
+bottom: 5px;
+left: 20px;
+color: rgb(33, 33, 33);
+}
+	
+	
+#retro {
+	padding: 20px;
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	font-size: 1.2em;
+	line-height: 1.3em;
+	color: rgb(66, 66, 66);
+}
+
+.block {
+	/*display: block;*/
+}

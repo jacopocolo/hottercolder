@@ -1,0 +1,159 @@
+<!DOCTYPE php>
+<html>
+<!--
+My coding philosophy
+__          ___    _       _______ ________      ________ _____   __          ______  _____  _  __ _____ 
+\ \        / / |  | |   /\|__   __|  ____\ \    / /  ____|  __ \  \ \        / / __ \|  __ \| |/ // ____|
+ \ \  /\  / /| |__| |  /  \  | |  | |__   \ \  / /| |__  | |__) |  \ \  /\  / / |  | | |__) | ' /| (___  
+  \ \/  \/ / |  __  | / /\ \ | |  |  __|   \ \/ / |  __| |  _  /    \ \/  \/ /| |  | |  _  /|  <  \___ \ 
+   \  /\  /  | |  | |/ ____ \| |  | |____   \  /  | |____| | \ \     \  /\  / | |__| | | \ \| . \ ____) |
+    \/  \/   |_|  |_/_/    \_\_|  |______|   \/   |______|_|  \_\     \/  \/   \____/|_|  \_\_|\_\_____/ 
+-->
+<head>
+<title>hotter/colder</title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+<!--metatag per permettere a Safari di trasformare il sito in una webapp-->
+<meta name=viewport content="initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+
+<!--Le favicons-->
+<link rel="apple-touch-icon-precomposed" sizes="57x57" href="favicons/apple-touch-icon-57x57.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="favicons/apple-touch-icon-114x114.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicons/apple-touch-icon-72x72.png" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicons/apple-touch-icon-144x144.png" />
+<link rel="apple-touch-icon-precomposed" sizes="60x60" href="favicons/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon-precomposed" sizes="120x120" href="favicons/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon-precomposed" sizes="76x76" href="favicons/apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon-precomposed" sizes="152x152" href="favicons/apple-touch-icon-152x152.png" />
+<link rel="icon" type="image/png" href="favicons/favicon-16x16.png" sizes="16x16" />
+<link rel="icon" type="image/png" href="favicons/favicon-32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="favicons/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/png" href="favicons/favicon-160x160.png" sizes="160x160" />
+<meta name="msapplication-TileColor" content="#ffc40d" />
+<meta name="msapplication-TileImage" content="favicons/mstile-144x144.png" />
+<meta name="msapplication-square70x70logo" content="favicons/mstile-70x70.png" />
+<meta name="msapplication-square150x150logo" content="favicons/mstile-150x150.png" />
+<meta name="msapplication-square310x310logo" content="favicons/mstile-310x310.png" />
+
+<!--font, jquery, bootstrap per i popover e fittext per adattare il testo alle varie risoluzioni in modo responsivo. E la funzione che fa funzionare tutto: hotterColder-->
+<link href='http://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic' rel='stylesheet' type='text/css'>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery.fittext.js"></script>
+<script src="js/jquery.flippy.js"></script>
+<script src="js/hotterColder.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+<link id="stile" rel="stylesheet" type="text/css" href="css/stile.css"/>
+
+<!-- Il javascript. Qui succede tutto. -->
+<script type="text/javascript">
+hotterColder();
+</script>
+
+</head>
+<body>
+<div id="wrapper">
+		<div id="center-titlescreen">
+		<span id="titlescreen">Oggi sarà più caldo o più freddo di ieri?</span>
+		</div>
+		
+		<div id="table">
+			<span id="hotterOrColder" style="display: none;">
+			
+				<span id="popoverOggi" style="display: none;">Oggi</span>
+					<span id="citta" style="display: none;"></span>
+					 <span id="risultato" style="display: none;"></span>
+					 	<span class="block"></span>
+					<span id="popoverIeri" style="display: none;"> ieri</span>.
+	
+				<span id="pioggia" style="display: none;"></span>
+			
+			</span>
+		</div>
+	
+	<span id="credits">Credits</span>
+	<span id="chiudi">Chiudi</span>
+	
+</div>
+
+<!--i div nascosti dei popover-->
+<div class="popOggi" style="display: none;">
+<span class="fs1 climacon thermometer medium-high"></span><span id="oggi"></span>
+</div>
+<br>
+
+<div class="popIeri" style="display: none;">
+<span class="fs1 climacon thermometer medium -high" style="content: "\e03b";"></span><span id="ieri"></span>
+</div>
+<br>
+<div class="popProb" style="display: none;">
+<span class="fs1 climacon rain" style='content: "\e003"'></span><span id="prob"></span>
+</div>
+
+</body>
+
+<!--Il codice per fare il flip-->
+<script>
+$('#credits').click(function() {
+$('#table').flippy({
+duration: "300",
+verso: "<div id='retro'>hotterColder è fatta con le API meteo di Forecast.io, tanti tentativi, un po’ di Twitter Bootstrap, il plugin FitText di Paravel e i consigli di una straordinaria ragazza. Il font è Libre Baskerville.<br><br>Chi ha fatto hotterColder? Io. Confesso subito: è il mio primo programma che supera le 50 righe: se qualcosa non funziona, scusami. O, meglio ancora, fai un commit su GitHub o scrivimi su Twitter.</div>",
+	onStart: function(){
+	$('#credits').fadeOut();
+	$('#chiudi').fadeIn().delay( 500 );
+	}
+});
+});
+
+$('#chiudi').click(function() {
+	$('#table').flippyReverse();
+	$('#chiudi').fadeOut();
+	$('#credits').fadeIn().delay( 500 );
+	openPopover();
+	//$('#table').css("background-color", "trasparent").delay( 301 );
+	//console.log('hello');
+});
+</script>
+
+<!--I popover di Twitter bootstrap-->
+<script>
+$(document).ready(function(){
+  $('#popoverOggi').popover({ 
+  	placement:'top',
+    html : true,
+    content: function() {
+      return $('.popOggi').html();
+    }
+  });
+});
+
+$(document).ready(function(){
+  $('#popoverIeri').popover({ 
+    placement:'bottom',
+    html : true,
+    content: function() {
+      return $('.popIeri').html();
+    }
+  });
+});
+
+function openPopover()
+{$('#ombrello').popover({ 
+    placement:'bottom',
+    html : true,
+    content: function() {
+      return $('.popProb').html();
+    }
+  });
+};
+</script>
+
+<!--Il jQuery che richiama il plugin per il testo responsivo fitText.-->
+<script>
+jQuery("#hotterOrColder, #titlescreen").fitText(1, { minFontSize: '35px', maxFontSize: '65px' })
+</script>
+
+</html>
