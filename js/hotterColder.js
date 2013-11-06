@@ -45,7 +45,7 @@ function hotterColder() {
 	}
 	
 	function getWeather(la, lo, da) {
-		var apiKeyForecast = '07f8c1325179caf8a7480120bf808db2';
+		var apiKeyForecast = YOUR FORECAST.IO API KEY;
 		var url = 'https://api.forecast.io/forecast/';
 		var lati = la;
 		var longi = lo;
@@ -67,7 +67,7 @@ function hotterColder() {
 	
 	function successo(position) {
 	console.log(position.coords.latitude,position.coords.longitude);
-	var apiKeyCloudMade = 'c192149735834a479c9a3979c7e4386b';
+	var apiKeyCloudMade = YOUR CLOUDMADE APIKEY;
 	/*Questo fa reverse geocoding. Con cloudmade ci sono 100.000 questy gratuite al mese. La Api key è gratuita*/
 	$.getJSON('http://beta.geocoding.cloudmade.com/v3/'+apiKeyCloudMade+'/api/geo.location.search.2?format=json&source=OSM&enc=UTF-8&limit=10&q='+position.coords.latitude+';'+position.coords.longitude+'&callback=?', function(dovesei) {
 	console.log(dovesei);
