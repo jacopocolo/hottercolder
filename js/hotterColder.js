@@ -20,15 +20,15 @@ function hotterColder() {
 	function farenheitToCelsius(x) {
 	return Math.round((x -32) * 5 / 9);}
 	
-	//Questa funzione ritorna, nel caso ci siano probabilità di pioggia superiori al 60%, un avviso che dice che potrebbe piovere. I valori di probabilità sono da 0.0 a 1.0. Ci si può lavorare ancora: per ora fa un loop e, se nella giornata trova anche solo un momento in cui potrebbe piovere, si ferma e lo segna.a 
+	//Questa funzione ritorna, nel caso ci siano probabilità di pioggia superiori al 90%, un avviso che dice che potrebbe piovere. I valori di probabilità sono da 0.0 a 1.0. Ci si può lavorare ancora: per ora fa un loop e, se nella giornata trova anche solo un momento in cui potrebbe piovere, si ferma e lo segna.a 
 	function potrebbePiovere() {
 	for(x=0; x<23; x++){ 
-			if (oggi.hourly.data[x].precipProbability >= 0.80) {
+			if (oggi.hourly.data[x].precipProbability >= 0.90) {
 			
 			console.log(oggi.hourly.data[x].precipProbability);
 			$(document).ready(function() {
-				document.getElementById("prob").innerHTML= ' Al ' + oggi.hourly.data[x].precipProbability*100 + '% pioverà.';
-				document.getElementById("pioggia").innerHTML= 'Vuoi un consiglio? Prendi l\'<span id="ombrello">ombrello</span>.';
+				document.getElementById("prob").innerHTML= ' There\'s a ' + oggi.hourly.data[x].precipProbability*100 + '% chance of rain';
+				document.getElementById("pioggia").innerHTML= 'Piece of advice? Take an <span id="ombrello">umbrella</span>.';
 				
 				//Questo qui sotto è un workaround. Non riesco a inserire la funzione per aprire il popover della pioggia nella pagina: quando il documento è pronto, la funzione non trova l'oggetto a cui si riferisce e allora non funziona. Così la chiamo da qui, dopo aver creato il suo oggetto;
 				openPopover();
@@ -41,11 +41,19 @@ function hotterColder() {
 	//È l'ultima funzione che viene eseguita. Quando le query e i calcoli sono a posto, questa funzione viene chiamata e nasconde lo splash screen e mostra lo span hotterOrColder che contiene l'app.
 	function showApp() {
 	$("#titlescreen, #center-titlescreen").hide();
-	$("#hotterOrColder, #popoverOggi, #risultato, #citta, #popoverIeri, #pioggia, #ombrello, #credits").fadeIn();
+	$("#hotterOrColder, #popoverOggi, #risultato, #citta, #popoverIeri, #pioggia, #ombrello, #credits").fadeIn(500
+	/*, function() {
+			$("#hotterOrColder").fitText(1, { minFontSize: '30px', maxFontSize: '45px' })
+		var wH = $(window).height()/2;
+		var eH = $("#table").height()/2;
+		var tableHeight = wH-eH;
+		$("#table").css('margin-top', tableHeight);
+
+	}*/);
 	}
 	
 	function getWeather(la, lo, da) {
-		var apiKeyForecast = YOUR FORECAST.IO API KEY;
+		var apiKeyForecast = '07f8c1325179caf8a7480120bf808db2';
 		var url = 'https://api.forecast.io/forecast/';
 		var lati = la;
 		var longi = lo;
@@ -67,23 +75,25 @@ function hotterColder() {
 	
 	function successo(position) {
 	console.log(position.coords.latitude,position.coords.longitude);
-	var apiKeyCloudMade = YOUR CLOUDMADE APIKEY;
+	var apiMapquest = 'Fmjtd%7Cluubnuuz21%2C2n%3Do5-9u12du';
 	/*Questo fa reverse geocoding. Con cloudmade ci sono 100.000 questy gratuite al mese. La Api key è gratuita*/
-	$.getJSON('http://beta.geocoding.cloudmade.com/v3/'+apiKeyCloudMade+'/api/geo.location.search.2?format=json&source=OSM&enc=UTF-8&limit=10&q='+position.coords.latitude+';'+position.coords.longitude+'&callback=?', function(dovesei) {
+	$.getJSON('http://open.mapquestapi.com/geocoding/v1/reverse?key='+apiMapquest+'&location='+position.coords.latitude+','+position.coords.longitude+'&accept-language=en', function(dovesei) {
 	console.log(dovesei);
-	if (dovesei.places[0].city.substring(0,1) == '~') {
+	document.getElementById("citta").innerHTML='in '+dovesei.results[0].locations[0].adminArea5+' '});
+	
+
+	/*if (dovesei.places[0].city.substring(0,1) == '~') {
 		var lunghezza = dovesei.places[0].city.length;
 		var citta = dovesei.places[0].city.substring(1, lunghezza);
 		document.getElementById("citta").innerHTML='a '+citta+' ';
-		}
-	});
+		}*/
 	
 	getWeather(position.coords.latitude,position.coords.longitude, date);
 	getWeather(position.coords.latitude,position.coords.longitude, dateIeri);
 	};
 	
 	function errore(position) {
-	alert('Non riesco a capire dove sei. La localizzazione è attiva?');
+	alert('I don\'t understand where you are. Is the location service active?');
 	}; 
 	
 	function writeWeather() {
@@ -111,9 +121,9 @@ function hotterColder() {
 			document.getElementById("ieri").innerHTML= ' '+ farenheitToCelsius(massimaIeri)+'°'+' \\ '+farenheitToCelsius(minimaIeri)+'°';
 			});
 		
-		//Queste qui sotto calcolano la temperatura media di oggi e di ieri, sommando insieme massima e minima e dividendo per due. I dati vengono anche convertiti in Celsius.
-		var oggiMedia = (farenheitToCelsius(massimaOggi)+farenheitToCelsius(minimaOggi)) / 2;
-		var ieriMedia = (farenheitToCelsius(massimaIeri)+farenheitToCelsius(minimaIeri)) / 2;
+		//Queste qui sotto calcolano la temperatura media di oggi e di ieri, sommando insieme massima e minima. I dati vengono anche convertiti in Celsius.
+		var oggiMedia = (farenheitToCelsius(massimaOggi)+farenheitToCelsius(minimaOggi));
+		var ieriMedia = (farenheitToCelsius(massimaIeri)+farenheitToCelsius(minimaIeri));
 		
 		//Queste confrontano la media di oggi con la media di ieri.
 		var oggiVsIeri = oggiMedia-ieriMedia;
@@ -123,28 +133,30 @@ function hotterColder() {
 		function calcolaMostra(callback) {
 			
 			if (oggiVsIeri>2) {
-				document.getElementById("risultato").innerHTML='sarà più caldo di';
+				document.getElementById("risultato").innerHTML='will be hotter than';
 				$('#wrapper').addClass('piucaldo');
 				}
 			else if (oggiVsIeri>1 && oggiVsIeri<=2) {
-					document.getElementById("risultato").innerHTML='sarà un po\' più caldo di';
+					document.getElementById("risultato").innerHTML='will be slightly hotter than';
 					$('#wrapper, #hotterOrColder').addClass('popiucaldo');
 				}
 			else if (oggiVsIeri>=-1 && oggiVsIeri<=1) {
-				document.getElementById("risultato").innerHTML='sarà più o meno come';
+				document.getElementById("risultato").innerHTML='is going to be like';
 				$('#wrapper, #hotterOrColder').addClass('comeieri');
 				$('#pioggia, #ieri, #oggi, #prob, .climacon').addClass('comeieri');
+				//$( "#popoverIeri" ).after( "<span>, more or less</span>" )
 				}
 			else if (oggiVsIeri<-1 && oggiVsIeri>=-2) {
-					document.getElementById("risultato").innerHTML='sarà un po\' più freddo di';
+					document.getElementById("risultato").innerHTML='will be slightly colder than';
 					$('#wrapper, #hotterOrColder').addClass('popiufreddo');
-					$('#pioggia, #ieri, #oggi, #prob, .climacon').addClass('POPpopiufreddo');
+					$('#pioggia, #ieri, #oggi, #prob, .climacon, #credits, #chiudi').addClass('POPpopiufreddo');
+					$('#credits, #chiudi').css("color", "rgb(255, 255, 255)");
 				}	
 			else if (oggiVsIeri<-2) {
-				document.getElementById("risultato").innerHTML='sarà più freddo di';
+				document.getElementById("risultato").innerHTML='will be colder than';
 				$('#wrapper, #hotterOrColder, #ombrello, #popoverIeri, #popoverOggi').addClass('piufreddo');
 				$('#pioggia, #ieri, #oggi, #prob, .climacon').addClass('POPpiufreddo');
-				
+				$('#credits, #chiudi').css("color", "rgb(255, 255, 255)");
 				};
 				
 			callback;

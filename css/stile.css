@@ -1,41 +1,3 @@
-/*@import url(http://weloveiconfonts.com/api/?family=entypo);
-
-/* entypo 
-[class*="entypo-"]:before {
-	font-family: 'entypo', sans-serif;
-	font-size: 0.4em;
-	}
-*/
-
-@font-face {
-	font-family: 'Climacons-Font';
-	src:url('../font/climacons-webfont.eot');
-	src:url('../font/climacons-webfont.eot?#iefix') format('embedded-opentype'),
-		url('../font/climacons-webfont.svg#Climacons-Font') format('svg'),
-		url('../font/climacons-webfont.woff') format('woff'),
-		url('../font/climacons-webfont.ttf') format('truetype');
-	font-weight: normal;
-	font-style: normal;
-}
-
-.climacon:before{
-	font-family: 'Climacons-Font';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	line-height: 1;
-	-webkit-font-smoothing: antialiased;
-}
-
-.climacon.rain:before,
-.climacon.rain.cloud:before {
-	/*content: "\e003";*/
-}
-
-.climacon.thermometer.medium-high:before {
-	/*content: "\e03b";*/
-}
-
 html {
  overflow: hidden;
 }
@@ -61,7 +23,7 @@ LE CLASSI SPECIALI PER I COLORI DI FONDO DEL WRAPPER
 }
 
 #wrapper.popiucaldo {
-	background-color: rgb(255, 246, 136);
+	background-color: rgb(255, 241, 136);
 }
 
 #wrapper.piufreddo {
@@ -70,6 +32,27 @@ LE CLASSI SPECIALI PER I COLORI DI FONDO DEL WRAPPER
 
 #wrapper.piucaldo {
 	background-color: rgb(255, 204, 51);
+}
+
+#card {
+	height: 100%;
+	width: 100%;
+	/*position: absolute;*/
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	transition: all 1s ease;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
 }
 
 #wrapper {
@@ -86,7 +69,6 @@ LE CLASSI SPECIALI PER I COLORI DI FONDO DEL WRAPPER
 }
 
 #center-titlescreen {
-	padding: 10px;
 	display: table-cell;
 	vertical-align: middle;
 	height: 100%;
@@ -97,30 +79,34 @@ LE CLASSI SPECIALI PER I COLORI DI FONDO DEL WRAPPER
   padding: 0px;
   display: table-cell;
   vertical-align: middle;
-  height: 100%;
   box-sizing: border-box;
   background-color: inherit;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 #titlescreen {
 	font-family: 'Libre Baskerville', Georgia, Times, serif;
 	/*font-size: 2.7em;*/
-	font-size: 60px;
+	font-size: 3em;
 	line-height: 1.2em;
 	/*height: 40%;*/
 	margin: 0 auto;
+	width: 100%;
 	/*display: block;*/
 	color: rgb(0, 73, 109);
 }
 
 #hotterOrColder {
 	font-family: 'Libre Baskerville', Georgia, Times, serif;
-	/*font-size: 2.7em;*/
-	font-size: 60px;
-	line-height: 1.2em;
+	font-size: 3em;
+	line-height: 1.3em;
 	/*height: 40%;*/
 	margin: 0 auto;
 	/*display: block;*/
+	width: 100%;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
 	}
 	
 /*Le classi speciali per i colori dei testi*/
@@ -184,34 +170,119 @@ LE CLASSI SPECIALI PER I COLORI DI FONDO DEL WRAPPER
 	border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
 }
 
+.popover {
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+}
 
 #credits {
 display: none;
-font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
 position: absolute;
 bottom: 5px;
-left: 20px;
-color: rgb(33, 33, 33);
+right: 20px;
+color: rgb(137, 137, 137);
+font: 0.8em Helvetica;
 }
 
 #chiudi {
 display: none;
 font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+font-size: 0.8em;
 position: absolute;
 bottom: 5px;
-left: 20px;
-color: rgb(33, 33, 33);
+right: 20px;
+color: rgb(137, 137, 137);
 }
-	
-	
-#retro {
-	padding: 20px;
+
+#front {
+	width: 100%;
+	height: 100%;	
+	display: block;
+	position: absolute;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+}
+
+#back {
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: absolute;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+	box-sizing: content-box;
+}
+
+#textcredit {
+	height: 100%;
+	background-color: #fff;
 	font-family: 'Libre Baskerville', Georgia, Times, serif;
 	font-size: 1.2em;
 	line-height: 1.3em;
 	color: rgb(66, 66, 66);
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+}
+
+#creditsParagraph {
+	padding: 20px;
+}
+
+.centered {
+	width: 100%;
+	  margin: auto;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  -webkit-transform: translate(-50%,-50%);
+	      -ms-transform: translate(-50%,-50%);
+	          transform: translate(-50%,-50%);
+}
+
+.flipped {
+	-webkit-transform: rotateY(-180deg);
+	-moz-transform: rotateY(-180deg);
+	-o-transform: rotateY(-180deg);
+	-ms-transform: rotateY(-180deg);
+	transform: rotateY(-180deg);
+}
+
+#card.flipped {
+	z-index: -1;
 }
 
 .block {
 	/*display: block;*/
 }
+
+/*LE MEDIA QUERIES*/
+@media (max-height: 250px)  {
+  #textcredit {
+    font-size: 0.8em;
+  	}
+  }
+
+
+@media (max-height: 320px)  {
+  #textcredit {
+    font-size: 0.9em;
+  	}
+  }
+  
+ @media (min-height: 321px) and (max-height: 420px) {
+   #textcredit {
+     font-size: 1em;
+   }
+   }
+
+@media (min-height: 580px) and (max-height: 2000px) {
+  #textcredit {
+    font-size: 1.3em;
+  }
+  }   
+ 

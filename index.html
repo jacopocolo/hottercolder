@@ -12,13 +12,15 @@ __          ___    _       _______ ________      ________ _____   __          __
 <head>
 <title>hotter/colder</title>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<meta name="description" content="A webapp that has an answer to the most common question we ask in the morning: Today will be hotter or colder than yesterday? Design and code by Jacopo Colò."> 
 
 <!--metatag per permettere a Safari di trasformare il sito in una webapp-->
-<meta name=viewport content="initial-scale=1">
+<meta name=viewport content="width = device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 
 <!--Le favicons-->
+<link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-touch-icon-57x57.png" />
 <link rel="apple-touch-icon-precomposed" sizes="57x57" href="favicons/apple-touch-icon-57x57.png" />
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="favicons/apple-touch-icon-114x114.png" />
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicons/apple-touch-icon-72x72.png" />
@@ -42,10 +44,23 @@ __          ___    _       _______ ________      ________ _____   __          __
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/jquery.fittext.js"></script>
-<script src="js/jquery.flippy.js"></script>
+
+<script type="text/javascript">
+var addToHomeConfig = {
+	animationIn: 'bubble',
+	animationOut: 'drop',
+	lifespan:50000,
+	expire:2,
+	touchIcon:true,
+	returningVisitor:true
+};
+</script>
+
+<script src="js/add2home.js"></script>
 <script src="js/hotterColder.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="css/add2home.css"/>
 <link id="stile" rel="stylesheet" type="text/css" href="css/stile.css"/>
 
 <!-- Il javascript. Qui succede tutto. -->
@@ -57,25 +72,35 @@ hotterColder();
 <body>
 <div id="wrapper">
 		<div id="center-titlescreen">
-		<span id="titlescreen">Oggi sarà più caldo o più freddo di ieri?</span>
+		<span id="titlescreen">Today will be hotter or colder than yesterday?</span>
 		</div>
 		
-		<div id="table">
-			<span id="hotterOrColder" style="display: none;">
+		<div id="card">
+			<div id="front">
+				<div id="table" class="centered">
+					<span id="hotterOrColder" style="display: none;">
+					
+						<span id="popoverOggi" style="display: none;">Today</span>
+							<span id="citta" style="display: none;"></span>
+							 <span id="risultato" style="display: none;"></span>
+							 	<span class="block"></span>
+							<span id="popoverIeri" style="display: none;"> yesterday</span>.
 			
-				<span id="popoverOggi" style="display: none;">Oggi</span>
-					<span id="citta" style="display: none;"></span>
-					 <span id="risultato" style="display: none;"></span>
-					 	<span class="block"></span>
-					<span id="popoverIeri" style="display: none;"> ieri</span>.
-	
-				<span id="pioggia" style="display: none;"></span>
+						<span id="pioggia" style="display: none;"></span>
+					
+					</span>
+					
+				</div>
+			</div>
 			
-			</span>
+			<div id='back'>
+				<div id='textcredit'><p id="creditsParagraph" class="centered">hotter/colder is made with the <a href="http://forecast.io/" target="_blank">Forecast.io</a> and the <a href="http://www.mapquestapi.com/geocoding/#reverse" target="_blank"> Mapquest and Openstreetmap</a> API, a lot of mistakes, a little bit of Twitter Bootstrap and the FitText plugin. The font is Libre Baskerville.<br><br>Who made hotter/colder? Me, <a href="http://www.jacopocolo.com" target="_blank">Jacopo Colò</a> (but the idea is <a href="https://twitter.com/chiara_bab" target="_blank">Chiara Lino</a>'s). It's my first program of more than 50 lines: if something doesn't work, be patient. Or, even better, post a new issue on <a href="https://github.com/jacopocolo/hottercolder" target="_blank">GitHub</a> or write to me on <a href="https://twitter.com/jacopocolo" target="_blank">Twitter</a>.</p>
+				</div>
+			</div>
 		</div>
-	
+		
 	<span id="credits">Credits</span>
-	<span id="chiudi">Chiudi</span>
+	<span id="chiudi">Close</span>
 	
 </div>
 
@@ -98,24 +123,17 @@ hotterColder();
 <!--Il codice per fare il flip-->
 <script>
 $('#credits').click(function() {
-$('#table').flippy({
-duration: "300",
-verso: "<div id='retro'>hotterColder è fatta con le API meteo di Forecast.io, tanti tentativi, un po’ di Twitter Bootstrap, il plugin FitText di Paravel e i consigli di una straordinaria ragazza. Il font è Libre Baskerville.<br><br>Chi ha fatto hotterColder? Io. Confesso subito: è il mio primo programma che supera le 50 righe: se qualcosa non funziona, scusami. O, meglio ancora, fai un commit su GitHub o scrivimi su Twitter.</div>",
-	onStart: function(){
-	$('#credits').fadeOut();
-	$('#chiudi').fadeIn().delay( 500 );
-	}
-});
+$('#card').toggleClass('flipped')
+$('#credits').fadeOut();
+$('#chiudi').fadeIn().delay( 500 );
 });
 
 $('#chiudi').click(function() {
-	$('#table').flippyReverse();
-	$('#chiudi').fadeOut();
-	$('#credits').fadeIn().delay( 500 );
-	openPopover();
-	//$('#table').css("background-color", "trasparent").delay( 301 );
-	//console.log('hello');
+$('#card').toggleClass('flipped');
+$('#chiudi').fadeOut();
+$('#credits').fadeIn().delay( 500 );
 });
+
 </script>
 
 <!--I popover di Twitter bootstrap-->
@@ -153,7 +171,14 @@ function openPopover()
 
 <!--Il jQuery che richiama il plugin per il testo responsivo fitText.-->
 <script>
-jQuery("#hotterOrColder, #titlescreen").fitText(1, { minFontSize: '35px', maxFontSize: '65px' })
+$(document).ready(function(){	
+	$(window).ready(
+		$("#titlescreen, #hotterOrColder").fitText(1, { minFontSize: '35px', maxFontSize: '60px' })
+		)
+		});
 </script>
+
+<!--Lo script che posiziona la scritta al centro-->
+
 
 </html>
