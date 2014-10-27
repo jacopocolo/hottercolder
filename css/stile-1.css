@@ -1,0 +1,305 @@
+html {
+ overflow: hidden;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow: hidden;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* 
+LE CLASSI SPECIALI PER I COLORI DI FONDO DEL WRAPPER
+*/
+
+#wrapper.comeieri {
+	background-color: rgb(239, 239, 239);
+}
+
+#wrapper.popiufreddo {
+	background-color: rgb(0, 172, 255);
+}
+
+#wrapper.popiucaldo {
+	background-color: rgb(255, 241, 136);
+}
+
+#wrapper.piufreddo {
+	background-color: rgb(0, 73, 109);
+}
+
+#wrapper.piucaldo {
+	background-color: rgb(255, 204, 51);
+}
+
+#card {
+	height: 100%;
+	width: 100%;
+	/*position: absolute;*/
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transition: all 1s ease;
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	-ms-transition: all 1s ease;
+	transition: all 1s ease;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+#wrapper {
+	margin: 0 auto;
+	padding: 20px;
+	width: 100%;
+	height: 100%;
+	display: table;
+	line-height: 1em;
+	box-sizing: border-box;
+	background-color: rgb(239, 239, 239);
+	/*letter-spacing:-2px;*/
+	overflow: hidden;
+}
+
+#center-titlescreen {
+	display: table-cell;
+	vertical-align: middle;
+	height: 100%;
+	box-sizing: border-box;	
+}
+
+#table {
+  padding: 0px;
+  display: table-cell;
+  vertical-align: middle;
+  box-sizing: border-box;
+  background-color: inherit;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+#titlescreen {
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	/*font-size: 2.7em;*/
+	font-size: 3em;
+	line-height: 1.2em;
+	/*height: 40%;*/
+	margin: 0 auto;
+	width: 100%;
+	/*display: block;*/
+	color: rgb(0, 73, 109);
+}
+
+#hotterOrColder {
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	font-size: 3em;
+	line-height: 1.3em;
+	/*height: 40%;*/
+	margin: 0 auto;
+	/*display: block;*/
+	width: 100%;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	}
+	
+/*Le classi speciali per i colori dei testi*/
+#hotterOrColder.comeieri {
+	color: rgb(255, 204, 51);
+}
+
+#pioggia.POPpopiufreddo, #hotterOrColder.popiufreddo {
+	color: rgb(255, 255, 255);
+}
+
+#hotterOrColder.popiucaldo {
+	color: rgb(0, 73, 109);
+}
+
+#pioggia.POPpiufreddo, #hotterOrColder.piufreddo {
+	color: rgb(255, 255, 255);
+}
+
+#hotterOrColder.piucaldo {
+	color: rgb(0, 73, 109);
+}
+
+
+#popoverOggi {
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	border-top: 2px solid rgba(0, 73, 109, 0.2);
+	}
+
+#popoverIeri, #ombrello {
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	border-bottom: 2px solid rgba(0, 73, 109, 0.2);
+	}
+
+.popOggi, .popIeri, #dataIeri, #dataOggi, #ieri, #oggi, .popProb, #prob {
+	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+	font-size: 0.5em;
+	line-height: 0.4em;
+}
+
+#pioggia.comeieri, #ieri.comeieri, #oggi.comeieri, #prob.comeieri, .climacon.comeieri, .climacon.comeieri {
+	color: rgb(0, 73, 109);
+}
+
+#ieri.POPpopiufreddo, #oggi.POPpopiufreddo, #prob.POPpopiufreddo, .climacon.POPpopiufreddo, .climacon.POPpopiufreddo {
+	color: rgb(0, 172, 255);
+}
+
+#ieri.POPpiufreddo, #oggi.POPpiufreddo, #prob.POPpiufreddo, .climacon.POPpiufreddo, .climacon.POPpiufreddo {
+	color: rgb(0, 102, 153);
+}
+
+#popoverOggi.piufreddo {
+	border-top: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+#popoverIeri.piufreddo, #ombrello.piufreddo {
+	border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.popover {
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+}
+
+#credits {
+display: none;
+position: absolute;
+bottom: 5px;
+right: 20px;
+color: rgb(137, 137, 137);
+font: 0.8em Helvetica;
+}
+
+#chiudi {
+display: none;
+font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+font-size: 0.8em;
+position: absolute;
+bottom: 5px;
+right: 20px;
+color: rgb(137, 137, 137);
+}
+
+#front {
+	width: 100%;
+	height: 100%;	
+	display: block;
+	position: absolute;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+}
+
+#back {
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: absolute;
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	-ms-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+	box-sizing: content-box;
+}
+
+#textcredit {
+	height: 100%;
+	background-color: #fff;
+	font-family: 'Libre Baskerville', Georgia, Times, serif;
+	font-size: 1.2em;
+	line-height: 1.3em;
+	color: rgb(66, 66, 66);
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+}
+
+#creditsParagraph {
+	padding: 20px;
+}
+
+.centered {
+	width: 100%;
+	  margin: auto;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  -webkit-transform: translate(-50%,-50%);
+	      -ms-transform: translate(-50%,-50%);
+	          transform: translate(-50%,-50%);
+}
+
+.flipped {
+	-webkit-transform: rotateY(-180deg);
+	-moz-transform: rotateY(-180deg);
+	-o-transform: rotateY(-180deg);
+	-ms-transform: rotateY(-180deg);
+	transform: rotateY(-180deg);
+}
+
+/*#card.flipped {
+	z-index: -1;
+}*/
+
+.block {
+	/*display: block;*/
+}
+
+/*LE MEDIA QUERIES*/
+@media (max-height: 250px)  {
+  #textcredit {
+    font-size: 0.8em;
+  	}
+  }
+
+
+@media (max-height: 320px)  {
+  #textcredit {
+    font-size: 0.9em;
+  	}
+  }
+  
+ @media (min-height: 321px) and (max-height: 420px) {
+   #textcredit {
+     font-size: 1em;
+   }
+   }
+
+@media (min-height: 580px) and (max-height: 2000px) {
+  #textcredit {
+    font-size: 1.3em;
+  }
+  }   
+ 
+ 
+ @media (min-width: 300px) and (max-width: 336px) {
+ 
+ #wrapper: {
+ 	padding: 19px;
+ } 
+ 
+ #hotterOrColder {
+ 	letter-spacing: -1.5px;
+ }
+ 
+ }
+ 
+ @media (min-width: 380px) and (max-width: 2000px) {
+ 
+ #hotterOrColder {
+ 	letter-spacing: 0px;
+ }
+ 
+ }

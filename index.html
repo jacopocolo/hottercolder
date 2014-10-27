@@ -12,12 +12,15 @@ __          ___    _       _______ ________      ________ _____   __          __
 <head>
 <title>hotter/colder</title>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-<meta name="description" content="A webapp that has an answer to the most common question we ask in the morning: Today will be hotter or colder than yesterday? Design and code by Jacopo Colò."> 
+<meta name="description" content="A webapp that tells you the one thing you need to know about the weather: today is hotter or colder than yesterday? Design and code by Jacopo Colò."> 
 
 <!--metatag per permettere a Safari di trasformare il sito in una webapp-->
 <meta name=viewport content="width = device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+
+<!--metatag open graph-->
+<meta property="og:image" content="http://jacopocolo.com/hottercolder/favicons/apple-touch-icon-144x144.png" />
 
 <!--Le favicons-->
 <link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-touch-icon-57x57.png" />
@@ -57,13 +60,19 @@ var addToHomeConfig = {
 </script>
 
 <script src="js/add2home.js"></script>
+<script src="js/jqwidont-compressed.js"></script>
+
+<script type="text/javascript">
+var auto = $.jqwidont.auto(); 
+$.jqwidont.auto(false);       
+</script>
+
 <script src="js/hotterColder.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
 <link rel="stylesheet" type="text/css" href="css/add2home.css"/>
 <link id="stile" rel="stylesheet" type="text/css" href="css/stile.css"/>
 
-<!-- Il javascript. Qui succede tutto. -->
 <script type="text/javascript">
 hotterColder();
 </script>
@@ -72,7 +81,7 @@ hotterColder();
 <body>
 <div id="wrapper">
 		<div id="center-titlescreen">
-		<span id="titlescreen">Today will be hotter or colder than yesterday?</span>
+		<span id="titlescreen">Is today hotter or colder than yesterday?</span>
 		</div>
 		
 		<div id="card">
@@ -82,11 +91,13 @@ hotterColder();
 					
 						<span id="popoverOggi" style="display: none;">Today</span>
 							<span id="citta" style="display: none;"></span>
-							 <span id="risultato" style="display: none;"></span>
+							<span id="risultato" style="display: none;"></span>
 							 	<span class="block"></span>
-							<span id="popoverIeri" style="display: none;"> yesterday</span>.
+							<span id="popoverIeri" style="display: none;">yesterday</span>.
 			
-						<span id="pioggia" style="display: none;"></span>
+						<span id="pioggia" style="display: none;">
+							Piece of advice? Take an <span id="ombrello" style="display: none;">umbrella</span>.
+						</span>
 					
 					</span>
 					
@@ -120,23 +131,29 @@ hotterColder();
 
 </body>
 
-<!--Il codice per fare il flip-->
+<!--Flip-->
 <script>
 $('#credits').click(function() {
 $('#card').toggleClass('flipped')
 $('#credits').fadeOut();
 $('#chiudi').fadeIn().delay( 500 );
+//when they fix the chrome's backface visibility problem, remove the following two lines
+$('#back').fadeIn().delay( 250 );
+$('#front').fadeOut().delay( 250 );
 });
 
 $('#chiudi').click(function() {
 $('#card').toggleClass('flipped');
 $('#chiudi').fadeOut();
 $('#credits').fadeIn().delay( 500 );
+//when they fix the chrome's backface visibility problem, remove the following two lines
+$('#front').fadeIn().delay( 250 );
+$('#back').fadeOut().delay( 250 );
 });
 
 </script>
 
-<!--I popover di Twitter bootstrap-->
+<!--Popover Twitter Bootstrap-->
 <script>
 $(document).ready(function(){
   $('#popoverOggi').popover({ 
@@ -169,16 +186,29 @@ function openPopover()
 };
 </script>
 
-<!--Il jQuery che richiama il plugin per il testo responsivo fitText.-->
+<!--FitText.-->
 <script>
 $(document).ready(function(){	
 	$(window).ready(
-		$("#titlescreen, #hotterOrColder").fitText(1, { minFontSize: '35px', maxFontSize: '60px' })
+		$("#titlescreen, #hotterOrColder").fitText(1, { minFontSize: '38px', maxFontSize: '60px' })
 		)
 		});
 </script>
 
-<!--Lo script che posiziona la scritta al centro-->
+<!--Google analytics-->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-47282025-1', 'jacopocolo.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+$('#titlescreen, #hotterOrColder').widont();
+</script>
 
 </html>
